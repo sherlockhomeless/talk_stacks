@@ -12,6 +12,15 @@ The talk stack is interacted with via means of a REST endpoints. This idea obvio
 
 The talk-stack backend is realized using flask. All the endpoints are defined in `main.py`.
 
+## Installation
+
+1. Clone repository
+2. Enter repository
+3. `pipenv shell`
+4. `pipenv sync`
+4. `flask run`
+5. profit
+
 ## TODO
 
 - [ ] Think about how to write unit-tests for flask (very valuable skill for $$$$)
