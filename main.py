@@ -9,32 +9,44 @@ from flask import Flask, redirect, request
 app = Flask(__name__)
 
 
-@app.route('/push_stack/<user>')
-def edit_stack(user):
+@app.route('/stack/<user>', methods=["POST", "GET"])
+def stack(user):
+    if request.method == 'POST':
+        return push_to_stack(user)
+    elif request.method == 'GET':
+        return pop_from_stack()
+    else:
+        logging.error("HTTP method not available")
 
-    return "cool"
+
+def pop_from_stack():
+    logging.error("Poping from Stack not implemented")
+    raise NotImplementedError
 
 
-@app.route('/pop_stack/<user', methods=["POST"])
-def push():
-    logging.info(f' received call with arguments {request.args}')
-    new_stack: StackFrame = parse_push_request(request)
-    persistence.add_stack_to_db(new_stack)
-
-def parse_push_request(r: request) -> StackFrame:
+def push_to_stack(user: str) -> str:
     """
-    Parses a request that should contain all information to construct a StackFrame
-    :param r:
+    Pushed a new StackFrame for user onto the corresponding stack
+    :param user:
     :return:
     """
-    user = r.args.get('user')
-    topic = r.args.get('topic')
-    description = r.args.get('description')
+    logging.info(f' received call with arguments {request.args}')
+    new_stack: StackFrame = parse_push_request()
+    persistence.add_stack_to_db(new_stack)
+    return f"pushed {new_stack} to stack for {user}"
+
+
+def parse_push_request() -> StackFrame:
+    """
+    Parses a request that should contain all information to construct a StackFrame
+    The request is encapsulated by the 'request'-variable imported from flask
+    :return:
+    """
+    user = request.args.get('user')
+    topic = request.args.get('topic')
+    description = request.args.get('description')
     date = datetime.datetime.now()
-    return StackFrame(user, topic, description, date)
-
-
-
+    return StackFrame(topic, description, user, date)
 
 
 if __name__ == '__main__':
