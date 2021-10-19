@@ -17,11 +17,11 @@ def add_stack_to_db(stack_frame: StackFrame):
     pass
 
 
-def pop_stack_from_db(user: str):
+def pop_stack_from_db(user: str) -> str:
     try:
         stack_frame = db[user].pop()
-    except IndexError:
+    except (IndexError, KeyError):
         stack_frame = EMPTY_STACK
 
     logging.debug(f'popped {stack_frame}')
-    return stack_frame
+    return stack_frame.serialize()

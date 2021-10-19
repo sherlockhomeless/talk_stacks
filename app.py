@@ -17,7 +17,7 @@ def home():
 def pop_from_stack(user: str) -> str:
     logging.info(f' received call with arguments {request.args}')
     top_stack: StackFrame = persistence.pop_stack_from_db(user)
-    return f"popped {top_stack} from stack"
+    return top_stack
 
 
 def push_to_stack(user: str, topic: str, description: str) -> str:
