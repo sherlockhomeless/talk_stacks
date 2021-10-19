@@ -18,7 +18,7 @@ def pop_from_stack():
     logging.info(f' received call with arguments {request.args}')
     top_stack: StackFrame = persistence.pop_stack_from_db()
     if top_stack == None:
-        
+        return "stack is empty"
     return f"popped {top_stack} from stack"
 
 @app.route('/push/<user>/<topic>/<description>')
