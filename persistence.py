@@ -22,6 +22,6 @@ def pop_stack_from_db(user: str):
         stack_frame = db[user].pop()
     except IndexError:
         stack_frame = EMPTY_STACK
-    
+
     logging.debug(f'popped {stack_frame}')
     return stack_frame

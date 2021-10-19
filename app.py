@@ -5,27 +5,27 @@ from stack import StackFrame
 import persistence
 
 
-from flask import Flask, redirect, request, render_template, url_for
+from flask import Flask, request, render_template
 app = Flask(__name__)
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-@app.route('/pop')
-def pop_from_stack():
+def pop_from_stack(user: str) -> str:
     logging.info(f' received call with arguments {request.args}')
-    top_stack: StackFrame = persistence.pop_stack_from_db()
-    if top_stack == None:
-        return "stack is empty"
+    top_stack: StackFrame = persistence.pop_stack_from_db(user)
     return f"popped {top_stack} from stack"
 
-@app.route('/push/<user>/<topic>/<description>')
+
 def push_to_stack(user: str, topic: str, description: str) -> str:
     """
     Pushed a new StackFrame for user onto the corresponding stack
-    :param user:
+    :param topic: topic of the new talk stack
+    :param user: user to which the new talk stack is added
+    :param description: description of the new topic
     :return:
     """
     logging.info(f' received call with arguments {request.args}')
@@ -36,17 +36,18 @@ def push_to_stack(user: str, topic: str, description: str) -> str:
     return f"pushed {new_stack} to stack for {user}"
 
 
-@app.route('/stack', methods=["POST", "GET"])
-def stack():
+@app.route('/stack/<user>', methods=["POST", "GET"])
+def stack(user: str):
     if request.method == 'POST':
-        name = request.form['nm']
         topic = request.form['tp']
         description = request.form['ds']
-        return redirect(url_for('push_to_stack', user=name, topic=topic, description=description))
+        push_to_stack(user, topic, description)
+
     elif request.method == 'GET':
-        return pop_from_stack()
+        return pop_from_stack(user)
     else:
         logging.error("HTTP method not available")
+
 
 if __name__ == '__main__':
     app.debug = True

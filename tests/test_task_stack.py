@@ -6,7 +6,6 @@ class FlaskTest(unittest.TestCase):
 
     def test_push_stack(self):
 
-
         tester = app.test_client(self)
         tester.post()
 
