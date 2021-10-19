@@ -1,8 +1,14 @@
 import unittest
+from app import app
 
 
-class MyTestCase(unittest.TestCase):
-    def test_get(self):
+class FlaskTest(unittest.TestCase):
+
+    def test_push_stack(self):
+
+
+        tester = app.test_client(self)
+        tester.post()
 
         self.assertEqual(True, False)  # add assertion here
 

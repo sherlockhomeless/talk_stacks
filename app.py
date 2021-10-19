@@ -39,12 +39,12 @@ def push_to_stack(user: str, topic: str, description: str) -> str:
 @app.route('/stack', methods=["POST", "GET"])
 def stack():
     if request.method == 'POST':
-          name = request.form['nm']
-          topic = request.form['tp']
-          description = request.form['ds']
-          return redirect(url_for('push_to_stack', user = name, topic = topic, description = description))
+        name = request.form['nm']
+        topic = request.form['tp']
+        description = request.form['ds']
+        return redirect(url_for('push_to_stack', user=name, topic=topic, description=description))
     elif request.method == 'GET':
-          return pop_from_stack()
+        return pop_from_stack()
     else:
         logging.error("HTTP method not available")
 
