@@ -14,10 +14,10 @@ The talk-stack backend is realized using flask. All the endpoints are defined in
 
 ## TODO
 
-[ ] Think about how to write unit-tests for flask (very valuable skill for $$$$)
-[ ] Implement */push_stack/<user>*: Adding a new talk-stack to the stack of <user>. This entails parsing the POST, creating an instance of StackFrame and make it persistant
-[ ] Implement */pop_stack/<user>*: Pop from the stack from the given user; ideally use templating to return a non-super-shitty-looking response
-[ ] Refactor
+- [ ] Think about how to write unit-tests for flask (very valuable skill for $$$$)
+- [ ] Implement */push_stack/<user>*: Adding a new talk-stack to the stack of <user>. This entails parsing the POST, creating an instance of StackFrame and make it persistant
+- [ ] Implement */pop_stack/<user>*: Pop from the stack from the given user; ideally use templating to return a non-super-shitty-looking response
+- [ ] Refactor
 
 ## Further information
 
